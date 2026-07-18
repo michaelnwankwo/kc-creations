@@ -715,7 +715,7 @@ footer > div p:first-child {
 }
 @media (max-width: 640px) {
   .video-hero {
-    height: 55vh;
+    height: 35vh;
     min-height: 300px;
   }
   .logo {
