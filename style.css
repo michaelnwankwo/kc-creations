@@ -634,7 +634,7 @@ footer > div p:first-child {
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--cream-dim);
-  font-weight: 700;
+  font-weight: 600;
 }
 #total {
   margin: 0;
