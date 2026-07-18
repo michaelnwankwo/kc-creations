@@ -762,3 +762,240 @@ footer > div p:first-child {
     background: var(--ink);
   }
 }
+
+/* ============================================================
+   Booking interaction update — multi-service selections + compact summary
+   ============================================================ */
+
+.skip-link {
+  position: fixed;
+  left: 12px;
+  top: 12px;
+  z-index: 100;
+  padding: 10px 14px;
+  color: var(--ink);
+  background: var(--gold-light);
+  border-radius: 3px;
+  transform: translateY(-160%);
+  transition: transform 0.2s ease;
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.site-hero {
+  position: relative;
+  min-height: min(62vh, 600px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  text-align: center;
+  background:
+    linear-gradient(135deg, rgba(13, 11, 8, 0.78), rgba(13, 11, 8, 0.94)),
+    radial-gradient(
+      circle at 75% 25%,
+      rgba(201, 153, 47, 0.35),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 20% 90%,
+      rgba(122, 90, 28, 0.38),
+      transparent 42%
+    ),
+    #171009;
+}
+.site-hero__glow {
+  position: absolute;
+  z-index: -1;
+  width: min(60vw, 700px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(232, 205, 130, 0.28);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 70px rgba(201, 153, 47, 0.035),
+    0 0 0 140px rgba(201, 153, 47, 0.025);
+}
+.site-hero__content {
+  max-width: 720px;
+  padding: 48px 24px;
+}
+.brand {
+  margin: 0;
+  color: var(--gold-light);
+  font-size: clamp(28px, 5vw, 48px);
+  font-family: "Fraunces", serif;
+  letter-spacing: 0.18em;
+}
+.brand-subtitle {
+  margin: 7px 0 40px;
+  color: var(--cream-dim);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+.site-hero h1 {
+  font-size: clamp(36px, 7vw, 72px);
+  line-height: 1.05;
+}
+.site-hero h1 em {
+  display: block;
+}
+.site-hero__content > p:not(.brand):not(.brand-subtitle) {
+  max-width: 500px;
+  margin: 20px auto 28px;
+  color: var(--cream-dim);
+  line-height: 1.7;
+}
+.hero-link {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 18px;
+  border: 1px solid var(--hair);
+  border-radius: 3px;
+  color: var(--cream);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.hero-link:hover {
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+
+/* The fixed bar is deliberately small and has no upward shadow or gradient. */
+body {
+  padding-bottom: 148px;
+}
+.booking-summary,
+footer.booking-summary {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 30;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 9px max(18px, env(safe-area-inset-right))
+    calc(10px + env(safe-area-inset-bottom))
+    max(18px, env(safe-area-inset-left));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex-wrap: nowrap;
+  background: rgba(13, 11, 8, 0.98);
+  backdrop-filter: blur(10px);
+  border: 0;
+  border-top: 1px solid var(--hair);
+  border-radius: 0;
+  box-shadow: none;
+}
+.booking-summary__total {
+  text-align: center;
+  line-height: 1;
+}
+.booking-summary__total p,
+footer > div.booking-summary__total p:first-child {
+  margin: 0 0 3px;
+  color: var(--cream-dim);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+#total {
+  display: block;
+  margin: 0;
+  color: var(--gold-light);
+  font-family: "Fraunces", serif;
+  font-size: 27px;
+  font-style: italic;
+  line-height: 1;
+}
+.cta {
+  width: min(100%, 430px);
+  min-height: 36px;
+  padding: 10px 20px;
+  border-radius: 2px;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  box-shadow: none;
+}
+.cta:hover,
+.cta:focus-visible {
+  box-shadow: none;
+  transform: translateY(-1px);
+}
+.toast {
+  bottom: 155px;
+  max-width: min(92vw, 620px);
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  body {
+    padding-bottom: 142px;
+  }
+  .site-hero {
+    min-height: 470px;
+  }
+  footer.booking-summary {
+    padding-top: 8px;
+    gap: 6px;
+  }
+  #total {
+    font-size: 25px;
+  }
+  footer button.cta {
+    width: min(100%, 420px);
+  }
+  .toast {
+    bottom: 148px;
+  }
+}
+
+/* -------------------------------------
+   Bottom booking bar: total aligned left
+   ------------------------------------- */
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* Do not center children horizontally */
+  justify-content: flex-start;
+  text-align: left; /* Stop inherited centered text */
+}
+
+/* Total + amount container */
+footer .minep {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  margin-right: auto;
+  text-align: left;
+  padding-left: 15px;
+}
+
+/* Explicitly override the existing mobile footer text-align:center */
+footer .minep p,
+footer .minep #total {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
+}
+
+/* Keep the action button full-width below the left-aligned total */
+footer .cta {
+  width: 100%;
+}
